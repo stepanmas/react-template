@@ -1,5 +1,4 @@
-const merge = require('webpack-merge');
-const path = require('path');
+const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./webpack.common.js');
 
@@ -34,10 +33,8 @@ module.exports = merge(common, {
                 modules: {
                   mode: 'local',
                   localIdentName: '[name]-[local]-[hash:4]',
-                  context: path.resolve(__dirname, 'src'),
                 },
                 importLoaders: 1,
-                localsConvention: 'camelCase',
               },
             },
             'sass-loader',
@@ -54,7 +51,7 @@ module.exports = merge(common, {
     historyApiFallback: {
       index: devTemplate,
       rewrites: [
-        { from: /^\/.+\/$/, to: `/${devTemplate}` },
+        { from: /^\/.+\/$/, to: `/${ devTemplate }` },
       ],
     },
     open: true,

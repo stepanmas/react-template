@@ -14,6 +14,7 @@ module.exports = {
     filename: 'bundle.[hash].js',
     publicPath: '/',
   },
+  target: 'web',
   performance: {
     maxEntrypointSize: 1 * 1024 * 1024,
     maxAssetSize: 1 * 1024 * 1024,
@@ -81,7 +82,7 @@ module.exports = {
       },
       {
         test: /\.(ico|gif|png|jpe?g)$/,
-        loaders: [
+        use: [
           {
             loader: 'file-loader',
             options: {
@@ -93,7 +94,7 @@ module.exports = {
       },
       {
         test: /\.(ttf|eot|woff2?|svg)$/,
-        loaders: [
+        use: [
           {
             loader: 'url-loader',
             options: {
@@ -105,9 +106,7 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        include: [
-          path.resolve(__dirname, 'src/components'),
-        ],
+        include: path.resolve(__dirname, 'src/components'),
         use: ['html-loader'],
       },
     ],

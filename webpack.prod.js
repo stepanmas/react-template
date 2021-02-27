@@ -1,5 +1,5 @@
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -15,16 +15,7 @@ function loadersStyles(loader) {
       },
     },
     loader,
-    {
-      loader: 'postcss-loader',
-      options: {
-        ident: 'postcss',
-        plugins: [
-          // eslint-disable-next-line global-require
-          require('autoprefixer')(),
-        ],
-      },
-    },
+    'postcss-loader',
     'sass-loader',
   ];
 }
@@ -61,10 +52,8 @@ module.exports = merge(common, {
               modules: {
                 mode: 'local',
                 localIdentName: '[hash:8]',
-                context: path.resolve(__dirname, 'src'),
               },
               importLoaders: 1,
-              localsConvention: 'camelCase',
             },
           }),
         }],
