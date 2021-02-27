@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { Observable, throwError } from 'rxjs';
+import { fromPromise } from 'rxjs/internal-compatibility';
+import { switchMap, tap } from 'rxjs/operators';
 
 const langDefault: string = 'en';
 const supportedLanguages: string[] = ['en', 'ru'];
@@ -28,28 +31,20 @@ function detectLanguage(): string {
   let lang = langMatch && langMatch.length > 1 ? langMatch[1] : null;
   lang = lang || localStorage.getItem('lang');
   lang = lang || window.navigator.language.split('-')[0] || langDefault;
-  lang = supportedLanguages.includes(lang) ? lang : langDefault;
-
-  return lang;
+  return supportedLanguages.includes(lang) ? lang : langDefault;
 }
 
-function fetchLanguage(lang: string, callback: Function): void {
-  fetch(`/lang/${lang}.json`)
-    .then((response: Response) => {
-      if (response.status >= 200 && response.status < 300) {
-        return Promise.resolve(response.json());
-      }
-
-      return Promise.reject(response.statusText || response.status);
-    })
-    .then((result) => {
-      i18n = result;
-      currentLanguage = lang;
-      callback(lang);
-    })
-    .catch((error) => {
-      throw new Error(error);
-    });
+function fetchLanguage(lang: string): Observable<any> {
+  return fromPromise(fetch(`/lang/${lang}.json`))
+    .pipe(
+      switchMap((response: Response) => (
+        response.status === 200 ? fromPromise(response.json()) : throwError(response)
+      )),
+      tap((result) => {
+        i18n = result;
+        currentLanguage = lang;
+      }),
+    );
 }
 
 export {

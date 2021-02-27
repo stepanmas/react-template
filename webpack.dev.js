@@ -51,7 +51,10 @@ module.exports = merge(common, {
     historyApiFallback: {
       index: devTemplate,
       rewrites: [
-        { from: /^\/.+\/$/, to: `/${ devTemplate }` },
+        {
+          from: /^\/.+\/$/,
+          to: `/${devTemplate}`,
+        },
       ],
     },
     open: true,

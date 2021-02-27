@@ -116,7 +116,7 @@
     "import/prefer-default-export": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-cycle": 0,
-    "simple-import-sort/sort": "error",
+    "simple-import-sort/imports": "error",
     "import/extensions": 0,
     "no-mixed-operators": 0,
     "lines-between-class-members": [
@@ -134,6 +134,10 @@
     "jsx-a11y/no-autofocus": 0,
     "@typescript-eslint/member-ordering": 2,
     "react/jsx-no-target-blank": 0,
-    "react/static-property-placement": 0
+    "react/static-property-placement": 0,
+    // https://stackoverflow.com/questions/63818415/react-was-used-before-it-was-defined
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react/jsx-props-no-spreading": 0
   }
 }

@@ -7,15 +7,27 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 
+import { ConfigModel } from './components/models';
+import routes from './routes';
+
+interface IApp {
+  configModel: ConfigModel;
+}
+
+interface IAppState {
+
+}
+
 @inject('configModel')
 @observer
-class App extends React.Component<any, any> {
-  componentMap = new Map();
+class App extends React.Component<IApp, IAppState> {
+  public componentMap = new Map();
 
-  constructor(props: any) {
+  constructor(props: IApp) {
     super(props);
-    this.componentMap.set('main', React.lazy(() => import('@components/main/Main')));
-    this.componentMap.set('not-found', React.lazy(() => import('@components/not-found/NotFound')));
+    routes.forEach((route) => (
+      this.componentMap.set(route.key, React.lazy(() => import(`@components/${route.key}`)))
+    ));
   }
 
   public render() {
@@ -24,10 +36,9 @@ class App extends React.Component<any, any> {
     if (!configModel.lang) {
       const lang = detectLanguage();
 
-      fetchLanguage(lang, (lg: string) => {
-        configModel.setLanguage(lg);
+      fetchLanguage(lang).subscribe((lg) => {
+        configModel.setLanguage(lang);
       });
-
       return null;
     }
 
@@ -35,15 +46,16 @@ class App extends React.Component<any, any> {
       <BrowserRouter>
         <React.Suspense fallback={<div>Загрузка...</div>}>
           <Switch>
-            <Route exact path="/:lang?" render={() => this.getComponentCached('main')} />
-            <Route render={() => this.getComponentCached('not-found')} />
+            {routes.map((route) => (
+              <Route render={() => this.getComponentCached(route.key)} {...route} />
+            ))}
           </Switch>
         </React.Suspense>
       </BrowserRouter>
     );
   }
 
-  private getComponentCached(name: string) {
+  protected getComponentCached(name: string) {
     const Component = this.componentMap.get(name);
     return this.componentMap.has(name) ? <Component /> : null;
   }
