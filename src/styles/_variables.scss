@@ -1,0 +1,20 @@
+@import "~bootstrap/scss/_functions";
+@import "~bootstrap/scss/_variables";
+@import "~bootstrap/scss/_mixins";
+@import "functions";
+@import "mixins";
+
+// Colors
+$color-text: #1c1c1c;
+$color-background: #fff;
+$color-border: #ccc;
+
+// Sizes
+$width-max: 1170px;
+$width-min: 320px;
+$view-base: 375px;
+
+// Fonts
+$font-default: "Tahoma" !default;
+$icomoon-font-family: "icons" !default;
+$icomoon-font-path: "./fonts/icons" !default;

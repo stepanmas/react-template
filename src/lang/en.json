@@ -1,0 +1,21 @@
+{
+  "common": {
+    "email": "Email",
+    "password": "Password",
+    "ok": "Ok",
+    "save": "Save",
+    "cancel": "Cancel",
+    "send": "Send"
+  },
+  "auth": {
+    "self": "Authorization"
+  },
+  "errors": {
+    "server": {
+      "500": "Internal server error. Please, try again later",
+      "404": "Not found",
+      "403": "Bad request",
+      "400": "Access forbidden"
+    }
+  }
+}
