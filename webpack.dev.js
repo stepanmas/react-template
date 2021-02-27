@@ -32,6 +32,7 @@ module.exports = merge(common, {
               options: {
                 modules: {
                   mode: 'local',
+                  exportLocalsConvention: 'camelCase',
                   localIdentName: '[name]-[local]-[hash:4]',
                 },
                 importLoaders: 1,
