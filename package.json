@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack serve --open --inline --progress --hot --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Warning: no test specified\" && exit 0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",
