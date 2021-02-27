@@ -5,7 +5,8 @@
   "version": "1.0.0",
   "scripts": {
     "start": "webpack serve --open --inline --progress --hot --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",
@@ -75,7 +76,6 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "classnames": "^2.2.6",
     "core-js": "^3.9.0",

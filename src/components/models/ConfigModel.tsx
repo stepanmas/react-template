@@ -1,10 +1,10 @@
-import { action, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 
 class ConfigModel {
-  @observable lang: string | null;
+  @observable lang: string | null = null;
 
   constructor() {
-    this.lang = null;
+    makeObservable(this);
   }
 
   @action
