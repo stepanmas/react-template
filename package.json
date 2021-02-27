@@ -1,6 +1,7 @@
 {
-  "name": "template",
+  "name": "react-template",
   "private": true,
+  "author": "@StepanMas",
   "version": "1.0.0",
   "scripts": {
     "start": "webpack-dev-server --open --inline --progress --hot --config webpack.dev.js",
