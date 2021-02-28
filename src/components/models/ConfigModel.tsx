@@ -1,9 +1,12 @@
 import { action, makeObservable, observable } from 'mobx';
 
-class ConfigModel {
+import Model from './Model';
+
+class ConfigModel extends Model {
   @observable lang: string | null = null;
 
   constructor() {
+    super();
     makeObservable(this);
   }
 
