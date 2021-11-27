@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = (env) => {
   const mode = env.prod ? 'production' : 'development';
@@ -66,6 +67,9 @@ module.exports = (env) => {
       new webpack.optimize.MinChunkSizePlugin({
         minChunkSize: 250000, // Minimum number of characters
       }),
+      !isDev && new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: './build',
+      }),
       new CopyWebpackPlugin({
         patterns: [
           /* {
@@ -78,7 +82,7 @@ module.exports = (env) => {
           },
         ],
       }),
-    ],
+    ].filter(Boolean),
     module: {
       rules: [
         {
@@ -97,19 +101,18 @@ module.exports = (env) => {
                 cacheDirectory: true,
                 babelrc: false,
                 plugins: [
+                  isDev && require.resolve('react-refresh/babel'),
                   ['@babel/plugin-proposal-decorators', { legacy: true }],
                   ['@babel/plugin-proposal-class-properties', { loose: false }],
                   '@babel/plugin-syntax-dynamic-import',
-                ],
+                ].filter(Boolean),
                 presets: [
-                  [
-                    '@babel/preset-env',
-                    { targets: { browsers: 'last 2 versions' } },
-                  ],
-                  '@babel/react',
+                  '@babel/preset-env',
+                  '@babel/preset-react',
+                  '@babel/preset-typescript',
                 ],
               },
-            }
+            },
           ],
         },
         {
@@ -161,7 +164,6 @@ module.exports = (env) => {
       https: false,
       open: true,
       port: 8080,
-      contentBase: './build',
     },
   };
-}
+};

@@ -1,5 +1,5 @@
 @function point($key) {
-  @return map-get($grid-breakpoints, $key)
+  @return map-get($grid-breakpoints, $key);
 }
 
 @function vmin($base, $screen: $view-base) {

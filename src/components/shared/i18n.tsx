@@ -16,7 +16,7 @@ declare global {
 }
 
 // eslint-disable-next-line no-extend-native
-String.prototype.replaceOf = function (variables: Object): string {
+String.prototype.replaceOf = function replaceOf(variables: Object): string {
   return Object
     .keys(variables)
     .reduce(
@@ -46,8 +46,8 @@ function fetchLanguage(lang: string): Observable<any> {
     );
 }
 
+export default i18n;
 export {
-  i18n as default,
   detectLanguage,
   fetchLanguage,
   currentLanguage,

@@ -4,9 +4,6 @@
     "paths": {
       "@*": [
         "./src/*"
-      ],
-      "styles*": [
-        "./src/styles/*"
       ]
     },
     "allowSyntheticDefaultImports": true,

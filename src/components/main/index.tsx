@@ -1,4 +1,4 @@
-import { IMain } from '@type/interfaces';
+import { IMain } from '@type/interface';
 import cx from 'classnames';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
@@ -12,7 +12,7 @@ interface IProps {
 @observer
 class Main extends React.Component<IProps, {}> implements IMain {
   z() {
-    return;
+
   }
 
   method() {

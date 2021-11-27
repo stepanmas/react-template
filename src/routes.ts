@@ -6,7 +6,6 @@ export interface IRoute extends RouteProps {
 
 const routes: IRoute[] = [
   {
-    exact: true,
     key: 'main',
     path: '/:lang?',
   },

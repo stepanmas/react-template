@@ -1,10 +1,9 @@
-// eslint-disable-next-line import/no-unresolved
 import '@styles/main.scss?global';
 
 import { detectLanguage, fetchLanguage } from '@components/shared/i18n';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { ConfigModel } from './components/models';
 import routes from './routes';
@@ -44,11 +43,11 @@ class App extends React.Component<IApp, IAppState> {
     return (
       <BrowserRouter>
         <React.Suspense fallback={<div>Загрузка...</div>}>
-          <Switch>
+          <Routes>
             {routes.map((route) => (
-              <Route render={() => this.getComponentCached(route.key)} {...route} />
+              <Route element={this.getComponentCached(route.key)} {...route} />
             ))}
-          </Switch>
+          </Routes>
         </React.Suspense>
       </BrowserRouter>
     );
