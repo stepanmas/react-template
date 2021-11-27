@@ -1,3 +1,4 @@
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,6 +11,7 @@ module.exports = (env) => {
   const mode = env.prod ? 'production' : 'development';
   const isDev = Boolean(env.dev);
   const BUILD_DATE = new Date().toISOString();
+  const sourcePath = path.resolve(__dirname, 'src');
   return {
     cache: isDev,
     devtool: isDev ? 'source-map' : false,
@@ -32,12 +34,14 @@ module.exports = (env) => {
     target: 'web',
     performance: {
       hints: false,
-      maxEntrypointSize: 1 * 1024 * 1024, // 1 mb
-      maxAssetSize: 1 * 1024 * 1024,
+      maxEntrypointSize: 2 * 1024 * 1024, // mb
+      maxAssetSize: 2 * 1024 * 1024,
     },
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'src'),
+        '@components': path.resolve(sourcePath, 'components'),
+        '@icons': path.resolve(sourcePath, 'icons'),
+        '@styles': path.resolve(sourcePath, 'styles'),
       },
       fallback: { path: false },
       symlinks: false,
@@ -61,7 +65,6 @@ module.exports = (env) => {
       new ForkTsCheckerWebpackPlugin(),
       new webpack.EnvironmentPlugin({
         BUILD_DATE: JSON.stringify(BUILD_DATE),
-        IMAGE_TAG: JSON.stringify(process.env.IMAGE_TAG || false),
         NODE_ENV: JSON.stringify(mode),
       }),
       new webpack.optimize.MinChunkSizePlugin({
@@ -70,10 +73,11 @@ module.exports = (env) => {
       !isDev && new CleanWebpackPlugin({
         cleanOnceBeforeBuildPatterns: './build',
       }),
+      isDev && new ReactRefreshWebpackPlugin(),
       new CopyWebpackPlugin({
         patterns: [
           /* {
-            from: './src/images',
+            from: './src/assets',
             to: './images',
           }, */
           {
@@ -122,7 +126,13 @@ module.exports = (env) => {
             use: [
               'style-loader',
               'css-loader',
-              'sass-loader',
+              {
+                loader: 'fast-sass-loader',
+                options: {
+                  sourceMap: isDev,
+                  includePaths: [path.resolve(__dirname, 'node_modules'), sourcePath],
+                },
+              },
             ],
           }, {
             use: [
@@ -133,14 +143,20 @@ module.exports = (env) => {
                   modules: {
                     mode: 'local',
                     localIdentName: isDev ? '[name]-[local]-[hash:4]' : '[hash:base64]',
-                    localIdentContext: path.resolve(__dirname, 'src'),
+                    localIdentContext: sourcePath,
                     exportLocalsConvention: 'camelCase',
                   },
                   importLoaders: 1,
                   sourceMap: isDev,
                 },
               },
-              'sass-loader',
+              {
+                loader: 'fast-sass-loader',
+                options: {
+                  sourceMap: isDev,
+                  includePaths: [path.resolve(__dirname, 'node_modules'), sourcePath],
+                },
+              },
             ],
           }],
         },

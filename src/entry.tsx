@@ -1,9 +1,9 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+import { RouterStore } from '@superwf/mobx-react-router';
 import { createBrowserHistory } from 'history';
 import { Provider } from 'mobx-react';
-import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
@@ -11,19 +11,17 @@ import { Router } from 'react-router';
 import App from './App';
 import * as models from './components/models';
 
-const hashHistory = createBrowserHistory();
-const routingStore = new RouterStore();
+const browserHistory = createBrowserHistory();
+const routingStore = new RouterStore(browserHistory);
 const stores = {
   routing: routingStore,
   ...models,
 };
-const history = syncHistoryWithStore(hashHistory, routingStore);
 
 // eslint-disable-next-line react/no-render-return-value
 const RENDER = (COMPONENT: any) => ReactDOM.render(
   <Provider {...stores}>
-    {/* @ts-ignore */}
-    <Router history={history}>
+    <Router history={routingStore.history}>
       <COMPONENT />
     </Router>
   </Provider>,

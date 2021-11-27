@@ -1,11 +1,12 @@
-import '@styles/main.scss?global';
+import './styles/main.scss?global';
 
+import { ConfigModel } from '@components/models';
 import { detectLanguage, fetchLanguage } from '@components/shared/i18n';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { ConfigModel } from './components/models';
+import Loading from './components/loading';
 import routes from './routes';
 
 interface IApp {
@@ -42,12 +43,12 @@ class App extends React.Component<IApp, IAppState> {
 
     return (
       <BrowserRouter>
-        <React.Suspense fallback={<div>Загрузка...</div>}>
-          <Routes>
+        <React.Suspense fallback={<Loading />}>
+          <Switch>
             {routes.map((route) => (
-              <Route element={this.getComponentCached(route.key)} {...route} />
+              <Route render={() => this.getComponentCached(route.key)} {...route} />
             ))}
-          </Routes>
+          </Switch>
         </React.Suspense>
       </BrowserRouter>
     );
