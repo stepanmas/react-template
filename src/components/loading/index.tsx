@@ -11,7 +11,11 @@ const Loading: React.FunctionComponent<IProps> = (
   },
 ) => (
   // @ts-ignore
-  <Size className="loading-text fill"><em className="loading inline" /> {children}</Size>
+  <Size className="loading-text fill">
+    <em className="loading inline" />
+    {' '}
+    {children}
+  </Size>
 );
 
 export default Loading;

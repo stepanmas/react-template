@@ -46,7 +46,7 @@ module.exports = (env) => {
       fallback: { path: false },
       symlinks: false,
       modules: ['node_modules'],
-      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css'],
+      extensions: ['.ts', '.tsx', '.js'],
       plugins: [
         // ..
       ],
