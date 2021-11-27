@@ -106,6 +106,7 @@ module.exports = (env) => {
                 babelrc: false,
                 plugins: [
                   isDev && require.resolve('react-refresh/babel'),
+                  'babel-plugin-transform-typescript-metadata',
                   ['@babel/plugin-proposal-decorators', { legacy: true }],
                   ['@babel/plugin-proposal-class-properties', { loose: false }],
                   '@babel/plugin-syntax-dynamic-import',

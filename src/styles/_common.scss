@@ -1,5 +1,9 @@
 @import "shared/loading";
 
+body {
+  font-family: $font-family;
+}
+
 a {
   &:hover {
     text-decoration: none;

@@ -2,11 +2,14 @@ import './styles/main.scss?global';
 
 import { ConfigModel } from '@components/models';
 import { detectLanguage, fetchLanguage } from '@components/shared/i18n';
+import { Container } from 'inversify';
+import { Provider as InversifyProvider } from 'inversify-react';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Loading from './components/loading';
+import UtilsService from './components/shared/UtilsService';
 import routes from './routes';
 
 interface IApp {
@@ -21,12 +24,14 @@ interface IAppState {
 @observer
 class App extends React.Component<IApp, IAppState> {
   public componentMap = new Map();
+  private readonly container = new Container();
 
-  constructor(props: IApp) {
-    super(props);
+  constructor(props: IApp, context) {
+    super(props, context);
     routes.forEach((route) => (
       this.componentMap.set(route.key, React.lazy(() => import(`@components/${route.key}`)))
     ));
+    this.container.bind(UtilsService).toSelf();
   }
 
   public render() {
@@ -42,15 +47,17 @@ class App extends React.Component<IApp, IAppState> {
     }
 
     return (
-      <BrowserRouter>
-        <React.Suspense fallback={<Loading />}>
-          <Switch>
-            {routes.map((route) => (
-              <Route render={() => this.getComponentCached(route.key)} {...route} />
-            ))}
-          </Switch>
-        </React.Suspense>
-      </BrowserRouter>
+      <InversifyProvider container={this.container}>
+        <BrowserRouter>
+          <React.Suspense fallback={<Loading />}>
+            <Switch>
+              {routes.map((route) => (
+                <Route render={() => this.getComponentCached(route.key)} {...route} />
+              ))}
+            </Switch>
+          </React.Suspense>
+        </BrowserRouter>
+      </InversifyProvider>
     );
   }
 
