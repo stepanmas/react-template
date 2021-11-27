@@ -32,10 +32,12 @@ module.exports = merge(common, {
               options: {
                 modules: {
                   mode: 'local',
+                  localIdentName: isDev ? '[name]-[local]-[hash:4]' : '[hash:base64]',
+                  localIdentContext: path.resolve(__dirname, 'src'),
                   exportLocalsConvention: 'camelCase',
-                  localIdentName: '[name]-[local]-[hash:4]',
                 },
                 importLoaders: 1,
+                sourceMap: isDev,
               },
             },
             'sass-loader',

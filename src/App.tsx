@@ -4,8 +4,7 @@ import '@styles/main.scss?global';
 import { detectLanguage, fetchLanguage } from '@components/shared/i18n';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import { Route, Switch } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { ConfigModel } from './components/models';
 import routes from './routes';

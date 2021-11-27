@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Observable, throwError } from 'rxjs';
-import { fromPromise } from 'rxjs/internal-compatibility';
+import { from, Observable, throwError } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
 const langDefault: string = 'en';
@@ -35,10 +34,10 @@ function detectLanguage(): string {
 }
 
 function fetchLanguage(lang: string): Observable<any> {
-  return fromPromise(fetch(`/lang/${lang}.json`))
+  return from(fetch(`/lang/${lang}.json`))
     .pipe(
       switchMap((response: Response) => (
-        response.status === 200 ? fromPromise(response.json()) : throwError(response)
+        response.status === 200 ? from(response.json()) : throwError(response)
       )),
       tap((result) => {
         i18n = result;

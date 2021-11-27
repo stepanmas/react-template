@@ -11,6 +11,10 @@ interface IProps {
 @inject('configModel')
 @observer
 class Main extends React.Component<IProps, {}> implements IMain {
+  z() {
+    return;
+  }
+
   method() {
     return '';
   }

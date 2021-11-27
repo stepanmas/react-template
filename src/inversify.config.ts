@@ -2,7 +2,7 @@ import Main from '@components/main';
 import { Container } from 'inversify';
 
 import { TYPES } from './type';
-import { IMain } from './type/interfaces';
+import { IMain } from './type/interface';
 
 const myContainer = new Container();
 
