@@ -13,15 +13,7 @@ interface IProps {
 @inject('configModel')
 @observer
 class Main extends React.Component<IProps, {}> {
-  constructor(
-    props: IProps,
-    @resolve private readonly utils: UtilsService,
-  ) {
-    super(props);
-    this.state = {
-      ...this.state,
-    };
-  }
+  @resolve private readonly utils!: UtilsService;
 
   render() {
     console.log(this.props, this.utils.isDev());
