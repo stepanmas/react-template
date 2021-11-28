@@ -9,12 +9,6 @@ let currentLanguage = langDefault;
 // eslint-disable-next-line import/no-mutable-exports
 let i18n = {} as any;
 
-declare global {
-  interface String {
-    replaceOf: (variables: Object) => string;
-  }
-}
-
 // eslint-disable-next-line no-extend-native
 String.prototype.replaceOf = function replaceOf(variables: Object): string {
   return Object
