@@ -1,2 +1,5 @@
-export const DURATION_ANIMATE = 300;
-export const HEADER_AUTH_TOKEN = 'x-auth-token';
+export const FORMAT_DATE = () => 'DD MMM at HH:mm';
+
+export const RECORDS_PER_PAGE = 20;
+
+export const UPLOAD_URL = 'https://dashboard.fstrk.io/nodes/upload_to_s3/';

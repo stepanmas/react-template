@@ -39,14 +39,12 @@ module.exports = (env) => {
     },
     resolve: {
       alias: {
-        '@components': path.resolve(sourcePath, 'components'),
-        '@icons': path.resolve(sourcePath, 'icons'),
-        '@styles': path.resolve(sourcePath, 'styles'),
+        '@app': path.resolve(sourcePath),
       },
       fallback: { path: false },
       symlinks: false,
       modules: ['node_modules'],
-      extensions: ['.ts', '.tsx', '.js'],
+      extensions: ['.ts', '.tsx'],
       plugins: [
         // ..
       ],
@@ -180,7 +178,7 @@ module.exports = (env) => {
       hot: true,
       https: false,
       open: true,
-      port: 8080,
+      port: 8085,
     },
   };
 };

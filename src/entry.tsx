@@ -9,8 +9,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 
-import App from './App';
-import * as models from './components/models';
+import App from './app';
+import * as models from './models';
 
 const browserHistory = createBrowserHistory();
 const routingStore = new RouterStore(browserHistory);
@@ -26,17 +26,17 @@ const RENDER = (COMPONENT: any) => ReactDOM.render(
       <COMPONENT />
     </Router>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('fstrk-root'),
 );
 
 RENDER(App);
 
 if ((module as any).hot) {
   (module as any).hot.accept(
-    './App',
+    './app',
     () => {
       // eslint-disable-next-line global-require
-      const nextApp = require('./App').default;
+      const nextApp = require('./app').default;
       RENDER(nextApp);
     },
   );

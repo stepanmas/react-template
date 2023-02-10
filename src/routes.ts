@@ -6,11 +6,11 @@ export interface IRoute extends RouteProps {
 
 const routes: IRoute[] = [
   {
-    key: 'main',
+    key: 'systems/main',
     path: '/:lang?',
   },
   {
-    key: 'not-found',
+    key: 'systems/not-found',
     path: '*',
   },
 ];

@@ -1,7 +1,3 @@
-@function point($key) {
-  @return map-get($grid-breakpoints, $key);
-}
-
 @function vmin($base, $screen: $view-base) {
   $result: $base * 100 / $screen;
 

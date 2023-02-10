@@ -1,9 +1,13 @@
 import { action, makeObservable, observable } from 'mobx';
 
-import Model from './Model';
+import Model from './model';
 
-class ConfigModel extends Model {
-  @observable lang: string | null = null;
+export interface IConfigModel {
+  lang: string;
+}
+
+class ConfigModel extends Model<IConfigModel> implements IConfigModel {
+  @observable lang: string = 'ru';
 
   constructor() {
     super();
