@@ -1,4 +1,3 @@
-import cx from 'classnames';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 
@@ -12,7 +11,7 @@ interface IProps {
 class Main extends React.Component<IProps, {}> {
   render() {
     return (
-      <div className={cx('container', styles.container)}>
+      <div className={styles.container}>
         <h1>Main page</h1>
       </div>
     );

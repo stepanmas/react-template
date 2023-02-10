@@ -1,11 +1,13 @@
-@import "shared/loading";
+fstrk-widget {
+  @import "shared/loading";
 
-body {
-  font-family: $font-family;
-}
+  body {
+    font-family: $font-family;
+  }
 
-a {
-  &:hover {
-    text-decoration: none;
+  a {
+    &:hover {
+      text-decoration: none;
+    }
   }
 }

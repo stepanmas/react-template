@@ -18,6 +18,10 @@ const stores = {
   routing: routingStore,
   ...models,
 };
+const appName = 'app-root';
+const container = document.createElement(appName);
+document.body.appendChild(container);
+document.querySelector(appName)!.attachShadow({ mode: 'open' });
 
 // eslint-disable-next-line react/no-render-return-value
 const RENDER = (COMPONENT: any) => ReactDOM.render(
@@ -26,7 +30,7 @@ const RENDER = (COMPONENT: any) => ReactDOM.render(
       <COMPONENT />
     </Router>
   </Provider>,
-  document.getElementById('fstrk-root'),
+  document.querySelector(appName)!.shadowRoot,
 );
 
 RENDER(App);
