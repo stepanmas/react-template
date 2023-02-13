@@ -2,7 +2,9 @@ import './styles/main.scss?global';
 
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {
+  Route, Switch,
+} from 'react-router';
 
 import { ConfigModel } from './models';
 import routes from './routes';
@@ -35,15 +37,13 @@ class App extends React.Component<IApp, IAppState> {
     }
 
     return (
-      <BrowserRouter>
-        <React.Suspense fallback="Loading...">
-          <Switch>
-            {routes.map((route) => (
-              <Route render={() => this.getComponentCached(route.key)} {...route} />
-            ))}
-          </Switch>
-        </React.Suspense>
-      </BrowserRouter>
+      <React.Suspense fallback="Loading...">
+        <Switch>
+          {routes.map((route) => (
+            <Route render={() => this.getComponentCached(route.key)} {...route} />
+          ))}
+        </Switch>
+      </React.Suspense>
     );
   }
 
