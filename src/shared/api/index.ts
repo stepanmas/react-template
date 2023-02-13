@@ -109,19 +109,6 @@ export default class Api {
     return xhr;
   }
 
-  protected request<T = unknown>(config?: Partial<AjaxConfig>): Observable<AjaxResponse<T>> {
-    const configuration = { ...this.config, ...config };
-    if (configuration.body) {
-      configuration.body = Api.transpileCamelCase(configuration.body, false, this.caseOffKeys);
-    }
-    return ajax<T>(configuration).pipe(
-      map((res) => ({
-        ...res,
-        response: Api.transpileCamelCase(res.response, true, this.caseOffKeys),
-      })),
-    );
-  }
-
   public get<T = unknown>(): Observable<AjaxResponse<T>> {
     return this.request();
   }
@@ -154,5 +141,18 @@ export default class Api {
   public caseOff(keys: string[]): this {
     this.caseOffKeys = keys;
     return this;
+  }
+
+  protected request<T = unknown>(config?: Partial<AjaxConfig>): Observable<AjaxResponse<T>> {
+    const configuration = { ...this.config, ...config };
+    if (configuration.body) {
+      configuration.body = Api.transpileCamelCase(configuration.body, false, this.caseOffKeys);
+    }
+    return ajax<T>(configuration).pipe(
+      map((res) => ({
+        ...res,
+        response: Api.transpileCamelCase(res.response, true, this.caseOffKeys),
+      })),
+    );
   }
 }
