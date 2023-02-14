@@ -134,7 +134,7 @@ module.exports = (env) => {
       host: 'localhost',
       hot: true,
       https: false,
-      open: true,
+      open: false,
       port: 8085,
     },
   };

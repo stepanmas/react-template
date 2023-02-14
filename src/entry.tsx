@@ -12,6 +12,15 @@ import { Router } from 'react-router';
 import App from './app';
 import * as models from './models';
 
+// https://github.com/facebook/react/issues/16604#issuecomment-528663101
+if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
+  // eslint-disable-next-line global-require
+  const runtime = require('react-refresh/runtime');
+  runtime.injectIntoGlobalHook(window);
+  window.$RefreshReg$ = () => {};
+  window.$RefreshSig$ = () => (type) => type;
+}
+
 const browserHistory = createBrowserHistory();
 const routingStore = new RouterStore();
 const stores = {
