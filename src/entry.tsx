@@ -2,6 +2,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import 'reflect-metadata';
 
+import { createEmotionCache, MantineProvider } from '@mantine/core';
 import { createBrowserHistory } from 'history';
 import { Provider } from 'mobx-react';
 import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
@@ -37,12 +38,21 @@ document.body.appendChild(container);
 
 const root = ReactDOM.createRoot(shadowRoot);
 const history = syncHistoryWithStore(browserHistory, routingStore);
+const emotionCache = createEmotionCache({
+  key: 'mantine',
+  container: emotionRoot,
+});
 
 const RENDER = (COMPONENT: any) => root.render(
   <Provider {...stores}>
-    <Router history={history}>
-      <COMPONENT />
-    </Router>
+    <MantineProvider
+      emotionCache={emotionCache}
+      theme={{ ...stores.themeModel }}
+    >
+      <Router history={history}>
+        <COMPONENT />
+      </Router>
+    </MantineProvider>
   </Provider>,
 );
 
