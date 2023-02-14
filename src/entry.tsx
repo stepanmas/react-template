@@ -6,7 +6,7 @@ import { createBrowserHistory } from 'history';
 import { Provider } from 'mobx-react';
 import { RouterStore, syncHistoryWithStore } from 'mobx-react-router';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Router } from 'react-router';
 
 import App from './app';
@@ -24,15 +24,14 @@ const history = syncHistoryWithStore(browserHistory, routingStore);
 
 document.body.appendChild(container);
 document.querySelector(appName)!.attachShadow({ mode: 'open' });
+const root = ReactDOM.createRoot(document.querySelector(appName)!.shadowRoot!);
 
-// eslint-disable-next-line react/no-render-return-value
-const RENDER = (COMPONENT: any) => ReactDOM.render(
+const RENDER = (COMPONENT: any) => root.render(
   <Provider {...stores}>
     <Router history={history}>
       <COMPONENT />
     </Router>
   </Provider>,
-  document.querySelector(appName)!.shadowRoot,
 );
 
 RENDER(App);
