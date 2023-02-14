@@ -1,3 +1,4 @@
+import 'normalize.css';
 import './styles/main.scss?global';
 
 import { inject, observer } from 'mobx-react';
