@@ -1,6 +1,3 @@
-// import 'normalize.css';
-import './styles/main.scss?global';
-
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import {
@@ -31,12 +28,6 @@ class App extends React.Component<IApp, IAppState> {
   }
 
   public render() {
-    const { configModel } = this.props;
-
-    if (!configModel.lang) {
-      return null;
-    }
-
     return (
       <React.Suspense fallback="Loading...">
         <Switch>

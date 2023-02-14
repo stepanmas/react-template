@@ -11,8 +11,8 @@ interface ITranslate {
 export type TShortTranslateFn = (path: string, variables?: Record<string, any>) => string;
 
 export class TranslateModel extends Model<ITranslate> implements ITranslate {
-  @observable private cache = {};
   @observable currentLanguage: string = 'ru';
+  @observable private cache = {};
 
   public readonly dir = '/lang/';
   public readonly langDefault = 'ru';

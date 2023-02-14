@@ -72,10 +72,10 @@ module.exports = (env) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          {
+          /* {
             from: './src/assets',
             to: './assets',
-          },
+          }, */
           {
             from: './src/lang',
             to: './lang/',
@@ -115,47 +115,6 @@ module.exports = (env) => {
               },
             },
           ],
-        },
-        {
-          test: /\.s?css$/,
-          oneOf: [{
-            resourceQuery: /^\?global/,
-            use: [
-              'style-loader',
-              'css-loader',
-              {
-                loader: 'fast-sass-loader',
-                options: {
-                  sourceMap: isDev,
-                  includePaths: [path.resolve(__dirname, 'node_modules'), sourcePath],
-                },
-              },
-            ],
-          }, {
-            use: [
-              'style-loader',
-              {
-                loader: 'css-loader',
-                options: {
-                  modules: {
-                    mode: 'local',
-                    localIdentName: isDev ? '[name]-[local]-[hash:4]' : '[hash:base64]',
-                    localIdentContext: sourcePath,
-                    exportLocalsConvention: 'camelCase',
-                  },
-                  importLoaders: 1,
-                  sourceMap: isDev,
-                },
-              },
-              {
-                loader: 'fast-sass-loader',
-                options: {
-                  sourceMap: isDev,
-                  includePaths: [path.resolve(__dirname, 'node_modules'), sourcePath],
-                },
-              },
-            ],
-          }],
         },
         {
           test: /\.svg$/,

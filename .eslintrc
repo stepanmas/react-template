@@ -53,16 +53,15 @@
   "plugins": [
     "react",
     "jest",
-    "css-modules",
     "simple-import-sort",
     "sort-class-members"
   ],
-  "extends": ["airbnb", "plugin:css-modules/recommended"],
+  "extends": ["airbnb"],
   "settings": {
     "react": {
       "version": "detect"
     },
-    "import/ignore": [".s?css$","node_modules/*"]
+    "import/ignore": ["node_modules/*"]
   },
   "env": {
     "browser": true,

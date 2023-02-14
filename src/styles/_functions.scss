@@ -1,5 +1,0 @@
-@function vmin($base, $screen: $view-base) {
-  $result: $base * 100 / $screen;
-
-  @return $result + vmin;
-}

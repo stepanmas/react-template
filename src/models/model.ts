@@ -12,8 +12,8 @@ abstract class Model<T> {
     return this;
   }
 
-  protected on(subscription: Subscription): this {
-    this.subscribes.push(subscription);
+  @action
+  public reset(): this {
     return this;
   }
 
@@ -24,8 +24,8 @@ abstract class Model<T> {
     return this;
   }
 
-  @action
-  public reset(): this {
+  protected on(subscription: Subscription): this {
+    this.subscribes.push(subscription);
     return this;
   }
 }
