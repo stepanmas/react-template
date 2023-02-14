@@ -29,11 +29,14 @@ const stores = {
 };
 const appName = 'app-root';
 const container = document.createElement(appName);
-const history = syncHistoryWithStore(browserHistory, routingStore);
+const shadowRoot = container.attachShadow({ mode: 'open' });
+export const emotionRoot = document.createElement('div');
 
+shadowRoot.appendChild(emotionRoot);
 document.body.appendChild(container);
-document.querySelector(appName)!.attachShadow({ mode: 'open' });
-const root = ReactDOM.createRoot(document.querySelector(appName)!.shadowRoot!);
+
+const root = ReactDOM.createRoot(shadowRoot);
+const history = syncHistoryWithStore(browserHistory, routingStore);
 
 const RENDER = (COMPONENT: any) => root.render(
   <Provider {...stores}>

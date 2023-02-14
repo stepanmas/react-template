@@ -72,6 +72,10 @@ export class TranslateModel extends Model<ITranslate> implements ITranslate {
         source,
       );
   }
+
+  public setBrowserTitle(text: string, variables?: Record<string, any>) {
+    document.title = `${this.get(text, variables)} | My the App`;
+  }
 }
 
 export default new TranslateModel();

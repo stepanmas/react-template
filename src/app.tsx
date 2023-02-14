@@ -1,10 +1,9 @@
-import { MantineProvider } from '@mantine/core';
+import { createEmotionCache, MantineProvider } from '@mantine/core';
 import { inject, observer } from 'mobx-react';
 import React from 'react';
-import {
-  Route, Switch,
-} from 'react-router';
+import { Route, Switch } from 'react-router';
 
+import { emotionRoot } from './entry';
 import { ConfigModel, ThemeModel, TranslateModel } from './models';
 import routes from './routes';
 
@@ -31,9 +30,14 @@ class App extends React.Component<IApp, IAppState> {
   }
 
   public render() {
+    const myCache = createEmotionCache({
+      key: 'mantine',
+      container: emotionRoot,
+    });
     return (
       <React.Suspense fallback="Loading...">
         <MantineProvider
+          emotionCache={myCache}
           theme={{ ...this.props.themeModel }}
           withCSSVariables
           withGlobalStyles

@@ -1,14 +1,17 @@
 import React from 'react';
 
+import { NotFoundView } from './views/not-found.view';
+
 interface IProps {
 }
 
-class NotFound extends React.Component<IProps, {}> {
+interface IState {
+}
+
+class NotFound extends React.Component<IProps, IState> {
   render() {
     return (
-      <div>
-        <h1>404</h1>
-      </div>
+      <NotFoundView />
     );
   }
 }
