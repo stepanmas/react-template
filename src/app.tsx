@@ -2,20 +2,19 @@ import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { Route, Switch } from 'react-router';
 
-import { ConfigModel, ThemeModel, TranslateModel } from './models';
+import { ConfigModel, TranslateModel } from './models';
 import routes from './routes';
 
 interface IApp {
   configModel: ConfigModel;
   translateModel: TranslateModel;
-  themeModel: ThemeModel;
 }
 
 interface IAppState {
 
 }
 
-@inject('configModel', 'translateModel', 'themeModel')
+@inject('configModel', 'translateModel')
 @observer
 class App extends React.Component<IApp, IAppState> {
   public componentMap = new Map();

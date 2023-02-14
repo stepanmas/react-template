@@ -5,6 +5,7 @@ import { useStyles } from '../styles/not-found.styles';
 interface IProps {
 
 }
+
 export const NotFoundView = (props: IProps) => {
   const { classes } = useStyles();
 
